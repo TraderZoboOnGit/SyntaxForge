@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTAX FORGE | Where Tech Meets Trading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2D5AFF;
+            --primary-dark: #111111;
+            --primary-light: #1a1a1a;
+            --accent-green: #00FF88;
+            --accent-purple: #8A2BE2;
+            --accent-orange: #FF6B35;
+            --text-light: #f0f0f0;
+            --text-gray: #888;
+            --electric-blue: #00D4FF;
+            --circuit-green: #00FF88;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Circuit Background */
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, var(--primary-dark) 1px, transparent 1px) 0 0 / 50px 50px,
+                linear-gradient(var(--primary-dark) 1px, transparent 1px) 0 0 / 50px 50px;
+            z-index: -2;
+            opacity: 0.1;
+        }
+        
+        .circuit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(45, 90, 255, 0.1) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(45, 90, 255, 0.3);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--circuit-green);
+            font-size: 1.5rem;
+        }
+        
+        .logo span {
+            color: var(--primary-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--circuit-green);
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(45, 90, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 20px 120px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--text-light), var(--primary-blue), var(--circuit-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .disclaimer-box {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+        
+        .disclaimer-box h4 {
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .disclaimer-box p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .discord-button {
+            background: linear-gradient(45deg, #5865F2, #4752c4);
+        }
+        
+        .courses-button {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--text-light);
+        }
+        
+        /* Founders Section */
+        .founders {
+            padding: 100px 20px;
+            background: rgba(26, 26, 26, 0.5);
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-light);
+        }
+        
+        .section-title span {
+            color: var(--primary-blue);
+        }
+        
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .founder-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(45, 90, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .founder-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 15px 35px rgba(45, 90, 255, 0.1);
+        }
+        
+        .founder-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .founder-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .founder-role {
+            color: var(--circuit-green);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .founder-desc {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        .founder-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .expertise-tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--circuit-green);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Discord Structure */
+        .discord-structure {
+            padding: 100px 20px;
+            background: rgba(17, 17, 17, 0.8);
+        }
+        
+        .structure-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tier {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .tier-angel::before {
+            background: linear-gradient(to bottom, #888, #555);
+        }
+        
+        .tier-verified::before {
+            background: linear-gradient(to bottom, var(--primary-blue), #1a3dcc);
+        }
+        
+        .tier-vip::before {
+            background: linear-gradient(to bottom, var(--circuit-green), #00cc6a);
+        }
+        
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .tier-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+        
+        .tier-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--circuit-green);
+        }
+        
+        .tier-price.free {
+            color: var(--text-light);
+        }
+        
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+        
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .channel-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+        
+        .channel-item:hover {
+            background: rgba(45, 90, 255, 0.05);
+            border-color: rgba(45, 90, 255, 0.3);
+        }
+        
+        .channel-icon {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .channel-name {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .channel-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 100px 20px;
+            background: rgba(26, 26, 26, 0.5);
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-blue);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(45, 90, 255, 0.15);
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-10px);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .pricing-amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .pricing-amount span {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 15px;
+            color: var(--text-gray);
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--circuit-green);
+            font-weight: bold;
+        }
+        
+        .pricing-features li.disabled {
+            color: #555;
+        }
+        
+        .pricing-features li.disabled::before {
+            content: '✗';
+            color: #555;
+        }
+        
+        /* Courses */
+        .courses {
+            padding: 100px 20px;
+            background: rgba(17, 17, 17, 0.8);
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .course-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .course-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(45, 90, 255, 0.1);
+        }
+        
+        .course-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .course-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .course-desc {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        .course-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .course-tag {
+            background: rgba(45, 90, 255, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(45, 90, 255, 0.1), rgba(0, 255, 136, 0.05));
+            border-top: 1px solid rgba(45, 90, 255, 0.2);
+            border-bottom: 1px solid rgba(45, 90, 255, 0.2);
+        }
+        
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 80px 20px 40px;
+            background: var(--primary-light);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-desc {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        
+        .footer-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--circuit-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--text-gray);
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .risk-disclaimer {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .tier-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .pricing-cards, .courses-grid, .founders-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="circuit-bg"></div>
+    <div class="circuit-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code-branch logo-icon"></i>
+                SYNTAX<span>FORGE</span>
+            </a>
+            <div class="nav-links">
+                <a href="#founders" class="nav-link">Founders</a>
+                <a href="#discord" class="nav-link">Discord</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#courses" class="nav-link">Education</a>
+                <a href="#join" class="nav-link">Join</a>
+            </div>
+            <a href="https://discord.gg/syntaxforge" target="_blank" class="cta-button discord-button">
+                <i class="fab fa-discord"></i> Join Discord
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <h1>WHERE TECH MEETS TRADING</h1>
+        <p class="hero-tagline">The ultimate community for Shopify entrepreneurs, market traders, and crypto enthusiasts.</p>
+        <p class="hero-subtitle">Join Zobo & Razvyy in a protected environment where education meets application. Access our collective knowledge, tools, and a community focused on skill development.</p>
+        
+        <div class="disclaimer-box">
+            <h4>⚠️ IMPORTANT DISCLAIMER</h4>
+            <p>We are an educational community sharing knowledge and market analysis. We do NOT provide financial advice or guarantee profits.</p>
+            <p>Trading and investing carry substantial risk. Past performance does not guarantee future results. Always do your own research.</p>
+        </div>
+        
+        <div class="hero-buttons">
+            <a href="https://discord.gg/syntaxforge" target="_blank" class="cta-button discord-button">
+                <i class="fab fa-discord"></i> Enter Discord
+            </a>
+            <a href="#courses" class="cta-button courses-button">
+                <i class="fas fa-graduation-cap"></i> View Education
+            </a>
+        </div>
+    </section>
+    
+    <!-- Founders Section -->
+    <section id="founders" class="founders">
+        <h2 class="section-title">THE <span>FORGE</span> MASTERS</h2>
+        <div class="founders-grid">
+            <div class="founder-card fade-in">
+                <div class="founder-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="founder-name">TRADER ZOBO</h3>
+                <p class="founder-role">Market Strategist & Community Lead</p>
+                <p class="founder-desc">Focuses on market structure analysis, risk management frameworks, and creating protected learning environments free from common trading pitfalls.</p>
+                <div class="founder-expertise">
+                    <span class="expertise-tag">Market Analysis</span>
+                    <span class="expertise-tag">Risk Management</span>
+                    <span class="expertise-tag">Community Building</span>
+                    <span class="expertise-tag">Strategy Development</span>
+                </div>
+            </div>
+            
+            <div class="founder-card fade-in">
+                <div class="founder-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="founder-name">RAZVYY</h3>
+                <p class="founder-role">Tech Entrepreneur & Systems Architect</p>
+                <p class="founder-desc">Built multiple digital products and Shopify stores. Combines technical analysis with systematic approaches to markets and e-commerce.</p>
+                <div class="founder-expertise">
+                    <span class="expertise-tag">Shopify Systems</span>
+                    <span class="expertise-tag">Technical Analysis</span>
+                    <span class="expertise-tag">Product Development</span>
+                    <span class="expertise-tag">Automation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Discord Structure -->
+    <section id="discord" class="discord-structure">
+        <div class="structure-container">
+            <h2 class="section-title">COMMUNITY <span>STRUCTURE</span></h2>
+            
+            <!-- Angel Tier -->
+            <div class="tier tier-angel fade-in">
+                <div class="tier-header">
+                    <h3 class="tier-title">ANGEL ACCESS <span style="color: var(--text-gray); font-size: 1rem;">(Free)</span></h3>
+                    <div class="tier-price free">FREE</div>
+                </div>
+                <p style="color: var(--text-gray); margin-bottom: 20px;">What you see when you first join:</p>
+                <div class="channels-grid">
+                    <div class="channel-item">
+                        <i class="fas fa-book channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#rules-and-agreements</div>
+                            <div class="channel-desc">Community guidelines</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-lock-open channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#react-to-unlock</div>
+                            <div class="channel-desc">Gateway to specialized areas</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-comments channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#general-public</div>
+                            <div class="channel-desc">Open discussion</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Verified Tier -->
+            <div class="tier tier-verified fade-in">
+                <div class="tier-header">
+                    <h3 class="tier-title">VERIFIED MEMBER <span style="color: var(--text-gray); font-size: 1rem;">($19.99/month)</span></h3>
+                    <div class="tier-price">$19.99<span>/month</span></div>
+                </div>
+                <p style="color: var(--text-gray); margin-bottom: 20px;">After selecting your focus areas:</p>
+                <div class="channels-grid">
+                    <div class="channel-item">
+                        <i class="fas fa-shopping-cart channel-icon"></i>
+                        <div>
+                            <div class="channel-name">Shopify Systems</div>
+                            <div class="channel-desc">E-commerce strategies</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-chart-line channel-icon"></i>
+                        <div>
+                            <div class="channel-name">Market Analysis</div>
+                            <div class="channel-desc">Technical breakdowns</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-frog channel-icon"></i>
+                        <div>
+                            <div class="channel-name">Crypto Markets</div>
+                            <div class="channel-desc">Digital asset discussion</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-tools channel-icon"></i>
+                        <div>
+                            <div class="channel-name">Trading Tools</div>
+                            <div class="channel-desc">Indicators & automation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- VIP Tier -->
+            <div class="tier tier-vip fade-in">
+                <div class="tier-header">
+                    <h3 class="tier-title">VIP ELITE <span style="color: var(--text-gray); font-size: 1rem;">($99.99/month)</span></h3>
+                    <div class="tier-price">$99.99<span>/month</span></div>
+                </div>
+                <p style="color: var(--text-gray); margin-bottom: 20px;">Full access including advanced educational areas:</p>
+                <div class="channels-grid">
+                    <div class="channel-item">
+                        <i class="fas fa-crown channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#vip-lounge</div>
+                            <div class="channel-desc">Advanced discussions</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-bullseye channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#market-setups</div>
+                            <div class="channel-desc">Detailed analysis</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-earlybirds channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#strategy-deep-dives</div>
+                            <div class="channel-desc">In-depth educational content</div>
+                        </div>
+                    </div>
+                    <div class="channel-item">
+                        <i class="fas fa-users channel-icon"></i>
+                        <div>
+                            <div class="channel-name">#live-sessions</div>
+                            <div class="channel-desc">Real-time educational talks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <h2 class="section-title">COMMUNITY <span>ACCESS</span></h2>
+        <div class="pricing-cards">
+            <!-- Angel Tier -->
+            <div class="pricing-card fade-in">
+                <div class="pricing-title">ANGEL</div>
+                <div class="pricing-amount">FREE</div>
+                <ul class="pricing-features">
+                    <li>Access to public channels</li>
+                    <li>Read-only in specialized areas</li>
+                    <li>Basic community interaction</li>
+                    <li class="disabled">Participate in discussions</li>
+                    <li class="disabled">Educational content access</li>
+                    <li class="disabled">Advanced strategy areas</li>
+                    <li class="disabled">Live educational sessions</li>
+                </ul>
+                <a href="https://discord.gg/syntaxforge" target="_blank" class="cta-button" style="width: 100%; text-align: center;">
+                    Join Free
+                </a>
+            </div>
+            
+            <!-- Verified Tier -->
+            <div class="pricing-card featured fade-in">
+                <div class="pricing-badge">MOST POPULAR</div>
+                <div class="pricing-title">VERIFIED</div>
+                <div class="pricing-amount">$19.99<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Participate in all discussions</li>
+                    <li>Full specialized area access</li>
+                    <li>Daily market analysis</li>
+                    <li>Shopify system breakdowns</li>
+                    <li>Basic trading tools</li>
+                    <li>Community networking</li>
+                    <li class="disabled">VIP educational content</li>
+                    <li class="disabled">Live strategy sessions</li>
+                </ul>
+                <a href="#join" class="cta-button discord-button" style="width: 100%; text-align: center;">
+                    <i class="fas fa-arrow-up"></i> Upgrade to Verified
+                </a>
+            </div>
+            
+            <!-- VIP Tier -->
+            <div class="pricing-card fade-in">
+                <div class="pricing-title">VIP ELITE</div>
+                <div class="pricing-amount">$99.99<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Everything in Verified</li>
+                    <li>VIP educational channels</li>
+                    <li>Advanced strategy breakdowns</li>
+                    <li>In-depth market analysis</li>
+                    <li>Monthly educational sessions</li>
+                    <li>Priority community support</li>
+                    <li>Custom tool access</li>
+                    <li>Advanced risk management guides</li>
+                </ul>
+                <a href="#join" class="cta-button" style="width: 100%; text-align: center; background: linear-gradient(45deg, var(--circuit-green), #00cc6a);">
+                    <i class="fas fa-crown"></i> Access VIP Education
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses -->
+    <section id="courses" class="courses">
+        <h2 class="section-title">EDUCATIONAL <span>CONTENT</span></h2>
+        <div class="courses-grid">
+            <div class="course-card fade-in">
+                <div class="course-icon">
+                    <i class="fas fa-chart-network"></i>
+                </div>
+                <h3 class="course-title">Market Structure Mastery</h3>
+                <p class="course-desc">Learn to analyze market structure, identify key levels, and develop systematic approaches to various market conditions.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Zobo</span>
+                    <span class="course-tag">Analysis</span>
+                    <span class="course-tag">Education</span>
+                </div>
+            </div>
+            
+            <div class="course-card fade-in">
+                <div class="course-icon">
+                    <i class="fas fa-store-alt"></i>
+                </div>
+                <h3 class="course-title">Shopify System Building</h3>
+                <p class="course-desc">Comprehensive guide to building, scaling, and automating Shopify stores based on proven systematic approaches.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Razvyy</span>
+                    <span class="course-tag">Shopify</span>
+                    <span class="course-tag">Systems</span>
+                </div>
+            </div>
+            
+            <div class="course-card fade-in">
+                <div class="course-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="course-title">Risk Management Framework</h3>
+                <p class="course-desc">Detailed education on protecting capital, position sizing, and developing disciplined trading habits.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Both</span>
+                    <span class="course-tag">Risk</span>
+                    <span class="course-tag">Management</span>
+                </div>
+            </div>
+            
+            <div class="course-card fade-in">
+                <div class="course-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="course-title">Trading Psychology</h3>
+                <p class="course-desc">Educational content on maintaining discipline, managing emotions, and developing the mindset for consistent application of strategies.</p>
+                <div class="course-tags">
+                    <span class="course-tag">Zobo</span>
+                    <span class="course-tag">Psychology</span>
+                    <span class="course-tag">Mindset</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section id="join" class="cta-section">
+        <h2 class="cta-title fade-in">READY TO DEVELOP YOUR SKILLS?</h2>
+        <p class="cta-subtitle fade-in">Join our community of traders and entrepreneurs focused on systematic learning and skill development.</p>
+        <div class="disclaimer-box" style="max-width: 700px; margin: 30px auto;">
+            <h4>EDUCATIONAL PURPOSE ONLY</h4>
+            <p>All content is for educational purposes. We teach systematic approaches and analysis methods. Trading involves substantial risk of loss.</p>
+        </div>
+        <div class="hero-buttons fade-in">
+            <a href="https://discord.gg/syntaxforge" target="_blank" class="cta-button discord-button" style="padding: 18px 40px; font-size: 1.2rem;">
+                <i class="fab fa-discord"></i> JOIN SYNTAX FORGE
+            </a>
+            <a href="#pricing" class="cta-button courses-button" style="padding: 18px 40px; font-size: 1.2rem;">
+                <i class="fas fa-graduation-cap"></i> VIEW EDUCATION TIERS
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="#" class="footer-logo">SYNTAX<span>FORGE</span></a>
+                <p class="footer-desc">Where tech meets trading. An educational community focused on systematic learning and skill development in markets and entrepreneurship.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/syntaxforge" target="_blank" class="social-link">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#founders">Founders</a></li>
+                    <li><a href="#discord">Community Structure</a></li>
+                    <li><a href="#pricing">Access Tiers</a></li>
+                    <li><a href="#courses">Educational Content</a></li>
+                    <li><a href="#join">Join Community</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="footer-heading">Education</h3>
+                <ul class="footer-links">
+                    <li><a href="#courses">Market Analysis</a></li>
+                    <li><a href="#courses">Shopify Systems</a></li>
+                    <li><a href="#courses">Risk Management</a></li>
+                    <li><a href="#courses">Trading Psychology</a></li>
+                    <li><a href="#courses">All Education</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="footer-heading">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Risk Disclaimer</a></li>
+                    <li><a href="#">Educational Purpose</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <div class="risk-disclaimer">
+                <p><strong>RISK DISCLAIMER:</strong> Trading financial instruments carries substantial risk. The educational content provided by Syntax Forge is for informational purposes only and should not be considered financial advice. Past performance does not guarantee future results. You are solely responsible for your trading decisions and should consult with a qualified financial advisor before making any investment decisions.</p>
+                <p style="margin-top: 10px;">We do not guarantee profits or specific results. All trading involves risk of loss.</p>
+            </div>
+            <p style="margin-top: 20px;">&copy; 2023 Syntax Forge. All rights reserved. Educational community focused on skill development.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Fade in elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if(window.scrollY > 50) {
+                nav.style.background = 'rgba(17, 17, 17, 0.98)';
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.background = 'rgba(17, 17, 17, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+        
+        // Update member count (simulated)
+        function updateMemberCount() {
+            const memberCount = Math.floor(Math.random() * 50) + 400; // 400-450
+            const countElement = document.querySelector('.member-count');
+            if(countElement) {
+                countElement.textContent = `${memberCount}+ members`;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMemberCount();
+            setInterval(updateMemberCount, 30000);
+            
+            // Add educational focus to CTA
+            const ctaSubtitle = document.querySelector('.cta-subtitle');
+            if(ctaSubtitle) {
+                ctaSubtitle.innerHTML = `Join <span class="member-count" style="color: var(--circuit-green); font-weight: 600;">400+</span> focused learners in our systematic education community.`;
+            }
+        });
+        
+        // Console welcome
+        console.log('%c📚 SYNTAX FORGE - Educational Trading Community', 'color: #2D5AFF; font-size: 18px; font-weight: bold;');
+        console.log('%cSystematic Learning | Market Analysis | Risk Management | Shopify Systems', 'color: #00FF88;');
+        console.log('%c⚠️ Educational purposes only. Trading involves risk.', 'color: #FF6B35; font-weight: bold;');
+    </script>
+</body>
+</html>
